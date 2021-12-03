@@ -7,7 +7,7 @@ object Constants {
     const val OPTION_SERIES = "series"
     const val DATABASE_NAME = "movies_db"
 
-    const val SEARCH_EDIT_TIME_DELAY = 1000L
+    const val SEARCH_EDIT_TIME_DELAY = 500L
 
     //KEY ARGUMENTS
     const val KEY_MOVIE = "keyMovie"

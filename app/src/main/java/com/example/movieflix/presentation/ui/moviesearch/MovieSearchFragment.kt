@@ -63,6 +63,10 @@ class MovieSearchFragment : Fragment(){
         movieSearchViewModel =
             ViewModelProvider(this, movieSearchViewModelFactory)[MovieSearchViewModel::class.java]
 
+        binding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         setupEditTextBehavior()
         setupRecyclerView()
         setupObservers()
@@ -89,7 +93,7 @@ class MovieSearchFragment : Fragment(){
     private fun setupRecyclerView(){
         movieSearchAdapter.setOnItemClickListener { movie ->
             findNavController().navigate(
-                R.id.action_movieSearchFragment_to_movieDetailFragment,
+                R.id.movieDetailActivity,
                 bundleOf(KEY_MOVIE to movie)
             )
         }
