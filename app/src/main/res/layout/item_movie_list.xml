@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_video_height"
+    android:layout_marginStart="@dimen/app_margin_se"
+    android:layout_marginTop="@dimen/item_movie_margin_tb"
+    android:layout_marginEnd="@dimen/app_margin_se"
+    android:layout_marginBottom="@dimen/item_movie_margin_tb"
+    app:cardCornerRadius="@dimen/item_movie_corners_radius">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_movie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/item_movie_content_description"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/txt_movie_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/item_movie_title_margin_b"
+            android:layout_marginStart="@dimen/item_movie_title_margin_se"
+            android:layout_marginEnd="@dimen/item_movie_title_margin_se"
+            android:shadowColor="@color/shadow_text"
+            android:shadowDx="@dimen/shadowDx"
+            android:shadowDy="@dimen/shadowDy"
+            android:shadowRadius="@dimen/shadowRadius"
+            android:textColor="@color/white"
+            android:textSize="@dimen/item_movie_title_textsize" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

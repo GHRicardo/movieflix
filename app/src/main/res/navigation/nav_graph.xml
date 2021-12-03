@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.movieflix.presentation.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_moviesListFragment"
+            app:destination="@id/moviesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/moviesListFragment"
+        android:name="com.example.movieflix.presentation.ui.movielist.MoviesListFragment"
+        android:label="Movies" >
+        <action
+            android:id="@+id/action_moviesListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.movieflix.presentation.ui.moviedetail.MovieDetailFragment"
+        android:label="" />
+    <fragment
+        android:id="@+id/movieSearchFragment"
+        android:name="com.example.movieflix.presentation.ui.moviesearch.MovieSearchFragment"
+        android:label="Search" >
+        <action
+            android:id="@+id/action_movieSearchFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+</navigation>

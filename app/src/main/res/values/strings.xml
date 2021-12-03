@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MovieFlix</string>
+    <string name="home_txt_movies_text">Películas</string>
+    <string name="home_txt_series_text">Series</string>
+    <string name="search_hint">Nombre de la película</string>
+    <string name="related_videos">Videos relacionados</string>
+    <string name="popular_movies">Popular</string>
+    <string name="top_rated_movies">Top rated</string>
+
+    <!--Content Descriptions-->
+    <string name="home_img_content_description">Random image for background</string>
+    <string name="home_logo_content_description">Image for home logo</string>
+    <string name="item_movie_content_description">Movie image</string>
+    <string name="search_close_button_image">Search close button image</string>
+    <string name="video_placeholder_image">Video placeholder image</string>
+</resources>
