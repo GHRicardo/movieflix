@@ -3,7 +3,7 @@
     package="com.example.movieflix">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MovieFlixApplication"
@@ -14,10 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieFlix">
         <activity
+            android:name=".presentation.ui.moviedetail.MovieDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".presentation.MainActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/MainActivity"
-            android:exported="true">
+            android:theme="@style/MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

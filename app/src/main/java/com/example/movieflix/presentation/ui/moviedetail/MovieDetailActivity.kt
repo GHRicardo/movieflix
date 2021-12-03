@@ -1,20 +1,18 @@
 package com.example.movieflix.presentation.ui.moviedetail
 
 import android.annotation.SuppressLint
-import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieflix.MovieFlixApplication
 import com.example.movieflix.data.model.movie.Movie
 import com.example.movieflix.data.model.video.Video
-import com.example.movieflix.databinding.FragmentMovieDetailBinding
+import com.example.movieflix.databinding.ActivityMovieDetailBinding
 import com.example.movieflix.other.Constants.KEY_MOVIE
 import com.example.movieflix.other.Status
 import com.example.movieflix.other.animateShow
@@ -23,48 +21,42 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
 import javax.inject.Inject
 
-class MovieDetailFragment : Fragment() {
+class MovieDetailActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMovieDetailBinding
+
     @Inject
     lateinit var movieDetailViewModelFactory: MovieDetailViewModelFactory
 
     @Inject
     lateinit var movieVideoAdapter: MovieVideoAdapter
 
-    private lateinit var movieDetailViewModel: MovieDetailViewModel
+    private var movieDetailViewModel: MovieDetailViewModel? = null
 
-    private var _binding: FragmentMovieDetailBinding? = null
-    private val binding get() = _binding!!
-    private lateinit var movie:Movie
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MovieFlixApplication)
-            .createMovieSubcomponent()
-            .inject(this)
-    }
+    private lateinit var movie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MovieFlixApplication)
+            .createMovieSubcomponent()
+            .inject(this)
         super.onCreate(savedInstanceState)
-        movie = arguments?.getParcelable(KEY_MOVIE)!!
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        movie = intent?.extras?.getParcelable<Movie>(KEY_MOVIE)!!
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        binding = ActivityMovieDetailBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         movieDetailViewModel =
             ViewModelProvider(this, movieDetailViewModelFactory)[MovieDetailViewModel::class.java]
         setupRecyclerView()
         setupYoutubePlayer()
         setupObservers()
-        movieDetailViewModel.getVideosFromMovie(movie.id)
+
+        binding.imgBack.setOnClickListener {
+            onBackPressed()
+        }
+
+        movieDetailViewModel?.getVideosFromMovie(movie.id)
         bindMovie(movie)
     }
 
@@ -73,7 +65,7 @@ class MovieDetailFragment : Fragment() {
             playYoutubeVideo(video.key)
         }
         with(binding.rvVideosFromMovie){
-            layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(this@MovieDetailActivity, RecyclerView.HORIZONTAL, false)
             adapter = movieVideoAdapter
         }
     }
@@ -83,7 +75,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupObservers(){
-        movieDetailViewModel.videosFromMovieLiveData.observe(viewLifecycleOwner){
+        movieDetailViewModel?.videosFromMovieLiveData?.observe(this){
             when(it.status){
                 Status.LOADING -> {
                     /* NO-OP*/
@@ -123,22 +115,17 @@ class MovieDetailFragment : Fragment() {
             txtVotes.text = "${movie.voteCount} votos"
             txtOverview.text = movie.overview
             val posterURL = "https://image.tmdb.org/t/p/w500" + movie.backdropPath
-            Glide.with(this@MovieDetailFragment)
+            Glide.with(this@MovieDetailActivity)
                 .load(posterURL)
                 .into(binding.imgPlaceholderMovie)
         }
     }
 
     private fun playYoutubeVideo(videoKey:String){
-        binding.youtubeVideoView.getYouTubePlayerWhenReady(object:YouTubePlayerCallback{
+        binding.youtubeVideoView.getYouTubePlayerWhenReady(object: YouTubePlayerCallback {
             override fun onYouTubePlayer(youTubePlayer: YouTubePlayer) {
                 youTubePlayer.loadVideo(videoKey, 0F)
             }
         })
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

@@ -1,6 +1,6 @@
 package com.example.movieflix.presentation.di.movie
 
-import com.example.movieflix.presentation.ui.moviedetail.MovieDetailFragment
+import com.example.movieflix.presentation.ui.moviedetail.MovieDetailActivity
 import com.example.movieflix.presentation.ui.movielist.MoviesListFragment
 import com.example.movieflix.presentation.ui.moviesearch.MovieSearchFragment
 import dagger.Subcomponent
@@ -16,5 +16,5 @@ interface MovieSubcomponent {
 
     fun inject(fragment: MoviesListFragment)
     fun inject(fragment: MovieSearchFragment)
-    fun inject(fragment: MovieDetailFragment)
+    fun inject(activity: MovieDetailActivity)
 }

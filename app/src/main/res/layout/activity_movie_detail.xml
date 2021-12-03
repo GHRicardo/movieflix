@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".presentation.ui.moviedetail.MovieDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_youtube_player_height">
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtube_video_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/img_placeholder_movie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/video_placeholder_image" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_movie_title"
+            style="@style/TxtMovieDetail"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/detail_txt_title_margin_b"
+            android:textSize="@dimen/detail_txt_title_textsize" />
+
+        <TextView
+            android:id="@+id/txt_release_date"
+            style="@style/TxtMovieDetail"
+            android:layout_marginBottom="@dimen/detail_txt_date_margin_b"
+            android:textSize="@dimen/detail_txt_date_textsize" />
+
+        <TextView
+            android:id="@+id/txt_votes"
+            style="@style/TxtMovieDetail"
+            android:layout_marginBottom="@dimen/detail_txt_votes_margin_b"
+            android:textSize="@dimen/detail_txt_votes_textsize" />
+
+        <LinearLayout
+            android:id="@+id/lyt_rv_videos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_related_videos"
+                style="@style/TxtMovieDetail"
+                android:layout_marginBottom="@dimen/detail_txt_related_margin_b"
+                android:textSize="@dimen/detail_txt_related_textsize"
+                android:textStyle="bold"
+                android:text="@string/related_videos"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_videos_from_movie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_txt_overview_margin_t">
+
+            <TextView
+                android:id="@+id/txt_overview"
+                style="@style/TxtMovieDetail"
+                android:textSize="@dimen/detail_txt_overview_textsize" />
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/img_back"
+        android:layout_width="@dimen/toolbar_height"
+        android:layout_height="@dimen/toolbar_height"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="@dimen/back_size"
+            android:layout_height="@dimen/back_size"
+            android:layout_marginStart="@dimen/back_margin_s"
+            android:layout_marginEnd="@dimen/back_margin_e"
+            android:src="@drawable/outline_arrow_back_white_24"/>
+    </LinearLayout>
+
+</RelativeLayout>
