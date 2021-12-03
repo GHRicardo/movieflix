@@ -12,9 +12,12 @@ import androidx.navigation.ui.onNavDestinationSelected
 import com.bumptech.glide.Glide
 import com.example.movieflix.MovieFlixApplication
 import com.example.movieflix.R
+import com.example.movieflix.data.model.movie.Movie
 import com.example.movieflix.databinding.FragmentHomeBinding
+import com.example.movieflix.other.Constants
 import com.example.movieflix.other.Constants.OPTION_MOVIES
 import com.example.movieflix.other.Status
+import com.example.movieflix.other.hideView
 import com.example.movieflix.other.showView
 import javax.inject.Inject
 
@@ -27,6 +30,7 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var movieSelected:Movie
 
     companion object{
         const val TAG = "HomeFragment"
@@ -49,6 +53,11 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.crdMovieInfo.hideView()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         homeViewModel =
@@ -59,6 +68,19 @@ class HomeFragment : Fragment() {
             findNavController().navigate(
                 R.id.action_homeFragment_to_moviesListFragment,
                 bundleOf("type" to OPTION_MOVIES)
+            )
+        }
+
+        binding.imgSearch.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_homeFragment_to_movieSearchFragment
+            )
+        }
+
+        binding.crdBtnVer.setOnClickListener {
+            findNavController().navigate(
+                R.id.movieDetailActivity,
+                bundleOf(Constants.KEY_MOVIE to movieSelected)
             )
         }
     }
@@ -72,11 +94,7 @@ class HomeFragment : Fragment() {
 
                 Status.SUCCESS -> {
                     it.data?.let{ movie ->
-                        val posterURL = "https://image.tmdb.org/t/p/w500"+movie.posterPath
-                        Glide.with(this)
-                            .load(posterURL)
-                            .into(binding.imgHomeMovie)
-                        binding.imgHomeMovie.showView()
+                        bindMovie(movie)
                     }
                 }
 
@@ -85,6 +103,18 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun bindMovie(movie:Movie){
+        movieSelected = movie
+        binding.txtMovieTitle.text = movie.title
+        binding.txtOverview.text = movie.overview
+        val posterURL = "https://image.tmdb.org/t/p/w500"+movie.posterPath
+        Glide.with(this)
+            .load(posterURL)
+            .into(binding.imgHomeMovie)
+        binding.imgHomeMovie.showView()
+        binding.crdMovieInfo.showView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
