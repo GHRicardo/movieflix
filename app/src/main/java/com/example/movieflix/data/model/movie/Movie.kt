@@ -14,40 +14,40 @@ data class Movie(
     @SerializedName("id")
     val id: Int,
     @SerializedName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @SerializedName("original_language")
-    val originalLanguage: String,
+    val originalLanguage: String?,
     @SerializedName("original_title")
-    val originalTitle: String,
+    val originalTitle: String?,
     @SerializedName("overview")
-    val overview: String,
+    val overview: String?,
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @SerializedName("release_date")
-    val releaseDate: String,
+    val releaseDate: String?,
     @SerializedName("title")
-    val title: String,
+    val title: String?,
     @SerializedName("vote_average")
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int,
-    var type:String
+    var type:String?
 ):Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
         parcel.readDouble(),
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
         parcel.readDouble(),
         parcel.readInt(),
-        parcel.readString()!!
+        parcel.readString().orEmpty()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
