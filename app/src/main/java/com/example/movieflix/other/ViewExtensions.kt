@@ -1,7 +1,9 @@
 package com.example.movieflix.other
 
+import android.animation.ValueAnimator
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
 import androidx.transition.*
 
 fun View.showView(){
@@ -49,4 +51,15 @@ fun View.animateShow(parent: ViewGroup, isHiding:Boolean){
     }else{
         this.hideView()
     }
+}
+
+fun View.animateViewHeaderFling(duration: Long, setPoint: Float, offset: Float){
+    val startPosition = this.y
+    val animation = ValueAnimator.ofObject(
+        HeightFloatEvaluator(this),
+        startPosition,
+        -setPoint + offset
+    ).setDuration(duration)
+    animation.interpolator = OvershootInterpolator(0f)
+    animation.start()
 }

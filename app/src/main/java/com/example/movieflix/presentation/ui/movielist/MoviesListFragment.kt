@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.movieflix.MovieFlixApplication
 import com.example.movieflix.R
 import com.example.movieflix.data.model.movie.Movie
@@ -17,6 +18,7 @@ import com.example.movieflix.databinding.FragmentMoviesListBinding
 import com.example.movieflix.other.Constants.KEY_MOVIE
 import com.example.movieflix.other.Constants.OPTION_MOVIES
 import com.example.movieflix.other.Status
+import com.example.movieflix.other.animateViewHeaderFling
 import com.example.movieflix.other.hideView
 import com.example.movieflix.other.showView
 import com.google.android.material.tabs.TabLayout
@@ -35,6 +37,10 @@ class MoviesListFragment : Fragment() {
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
     private var option = ""
+
+    private var setPoint = 0F
+    private var canOpenWithTouch = false
+    private var mTotalScrolled = 0
 
     companion object{
         const val TAG = "MoviesListFragment"
@@ -70,11 +76,22 @@ class MoviesListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setPoint = resources.getDimension(R.dimen.toolbar_height)
         movieListViewModel =
             ViewModelProvider(this, movieListViewModelFactory)[MovieListViewModel::class.java]
         setupRecyclerView()
         setupObservers()
         movieListViewModel.getPopularMovies()
+
+        binding.imgBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.imgSearch.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_moviesListFragment_to_movieSearchFragment
+            )
+        }
 
         binding.tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -95,13 +112,37 @@ class MoviesListFragment : Fragment() {
     private fun setupRecyclerView(){
         movieAdapter.setOnItemClickListener { movie ->
             findNavController().navigate(
-                R.id.action_moviesListFragment_to_movieDetailFragment,
+                R.id.movieDetailActivity,
                 bundleOf(KEY_MOVIE to movie)
             )
         }
+
+        binding.rvMovies.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                mTotalScrolled += dy
+                autoscrollHeader()
+            }
+        })
+
         with(binding.rvMovies){
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = movieAdapter
+        }
+    }
+
+    private fun autoscrollHeader() {
+        val fTotalScrolled = mTotalScrolled.toFloat()
+        val offset = 1 - fTotalScrolled / setPoint
+        if (offset >= 0) {
+            binding.appBar.translationY = -fTotalScrolled
+            canOpenWithTouch = offset == 0f
+        } else {
+            if (!canOpenWithTouch) {
+                val duration: Long = 50
+                binding.appBar.animateViewHeaderFling(duration, setPoint, 0f)
+            }
+            canOpenWithTouch = true
         }
     }
 
@@ -128,6 +169,7 @@ class MoviesListFragment : Fragment() {
     }
 
     private fun displayMovies(movies:List<Movie>){
+        mTotalScrolled = 0
         movieAdapter.movies = movies
     }
 
