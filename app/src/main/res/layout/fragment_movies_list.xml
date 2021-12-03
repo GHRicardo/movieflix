@@ -8,32 +8,88 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_movies"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="@color/toolbar_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/img_back"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/back_size"
+                    android:layout_height="@dimen/back_size"
+                    android:layout_marginStart="@dimen/back_margin_s"
+                    android:layout_marginEnd="@dimen/back_margin_e"
+                    android:src="@drawable/outline_arrow_back_white_24"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/toolbar_textsize"
+                android:text="@string/list_movie_label"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/img_search"
+                android:layout_width="@dimen/toolbar_height"
+                android:layout_height="@dimen/toolbar_height"
+                android:gravity="center_vertical|end">
+
+                <ImageView
+                    android:layout_width="@dimen/search_size"
+                    android:layout_height="@dimen/search_size"
+                    android:layout_marginStart="@dimen/search_margin_s"
+                    android:layout_marginEnd="@dimen/search_margin_e"
+                    android:src="@drawable/outline_search_white_24"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/toolbar_color"
+            app:tabIndicatorColor="@color/white"
+            app:tabTextColor="@color/white">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/popular_movies" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/top_rated_movies" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/prg_movies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/toolbar_height"
-        app:tabIndicatorColor="@color/white"
-        app:tabTextColor="@color/white">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/popular_movies" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/top_rated_movies" />
-
-    </com.google.android.material.tabs.TabLayout>
 
 </RelativeLayout>

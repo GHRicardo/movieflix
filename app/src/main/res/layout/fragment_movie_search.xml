@@ -6,10 +6,40 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/toolbar_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/img_back"
+            android:layout_width="@dimen/toolbar_height"
+            android:layout_height="@dimen/toolbar_height"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/back_size"
+                android:layout_height="@dimen/back_size"
+                android:layout_marginStart="@dimen/back_margin_s"
+                android:layout_marginEnd="@dimen/back_margin_e"
+                android:src="@drawable/outline_arrow_back_white_24"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/toolbar_textsize"
+            android:text="@string/search_movie_label"
+            android:layout_weight="1" />
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/toolbar_height"
         android:background="@color/etxt_background">
 
         <EditText
