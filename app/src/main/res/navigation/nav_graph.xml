@@ -23,14 +23,14 @@
             app:exitAnim="@anim/exit_fade"
             app:popEnterAnim="@anim/enter_fade"
             app:popExitAnim="@anim/exit_fade" />
+        <action
+            android:id="@+id/action_homeFragment_to_seriesListFragment"
+            app:destination="@id/seriesListFragment" />
     </fragment>
     <fragment
         android:id="@+id/moviesListFragment"
         android:name="com.example.movieflix.presentation.ui.movielist.MoviesListFragment"
         android:label="Movies" >
-        <action
-            android:id="@+id/action_moviesListFragment_to_movieDetailActivity"
-            app:destination="@id/movieDetailActivity" />
         <action
             android:id="@+id/action_moviesListFragment_to_movieSearchFragment"
             app:destination="@id/movieSearchFragment"
@@ -42,14 +42,26 @@
     <fragment
         android:id="@+id/movieSearchFragment"
         android:name="com.example.movieflix.presentation.ui.moviesearch.MovieSearchFragment"
-        android:label="Search" >
-        <action
-            android:id="@+id/action_movieSearchFragment_to_movieDetailActivity"
-            app:destination="@id/movieDetailActivity" />
-    </fragment>
+        android:label="Search" />
     <activity
         android:id="@+id/movieDetailActivity"
         android:name="com.example.movieflix.presentation.ui.moviedetail.MovieDetailActivity"
         android:label="activity_movie_detail"
         tools:layout="@layout/activity_movie_detail" />
+    <fragment
+        android:id="@+id/seriesListFragment"
+        android:name="com.example.movieflix.presentation.ui.serielist.SeriesListFragment"
+        android:label="SeriesListFragment" >
+        <action
+            android:id="@+id/action_seriesListFragment_to_serieSearchFragment"
+            app:destination="@id/serieSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serieSearchFragment"
+        android:name="com.example.movieflix.presentation.ui.seriesearch.SerieSearchFragment"
+        android:label="SerieSearchFragment" />
+    <activity
+        android:id="@+id/serieDetailActivity"
+        android:name="com.example.movieflix.presentation.ui.seriedetail.SerieDetailActivity"
+        android:label="SerieDetailActivity" />
 </navigation>
