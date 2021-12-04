@@ -17,4 +17,7 @@ interface SerieDao {
 
     @Query("SELECT * FROM series WHERE type=:type")
     suspend fun getSeriesByType(type:String):List<Serie>
+
+    @Query("SELECT * FROM series")
+    suspend fun getSeries():List<Serie>
 }

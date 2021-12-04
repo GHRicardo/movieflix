@@ -17,4 +17,7 @@ interface MovieDao {
 
     @Query("SELECT * FROM movies WHERE type=:type")
     suspend fun getMoviesByType(type:String):List<Movie>
+
+    @Query("SELECT * FROM movies")
+    suspend fun getMovies():List<Movie>
 }
