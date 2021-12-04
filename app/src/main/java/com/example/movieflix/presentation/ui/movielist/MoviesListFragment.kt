@@ -117,17 +117,17 @@ class MoviesListFragment : Fragment() {
             )
         }
 
-        binding.rvMovies.addOnScrollListener(object: RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                mTotalScrolled += dy
-                autoscrollHeader()
-            }
-        })
-
         with(binding.rvMovies){
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = movieAdapter
+
+            addOnScrollListener(object: RecyclerView.OnScrollListener(){
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    mTotalScrolled += dy
+                    autoscrollHeader()
+                }
+            })
         }
     }
 

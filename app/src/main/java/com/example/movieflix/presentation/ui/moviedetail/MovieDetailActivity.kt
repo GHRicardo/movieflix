@@ -30,7 +30,7 @@ class MovieDetailActivity : AppCompatActivity() {
     @Inject
     lateinit var movieVideoAdapter: MovieVideoAdapter
 
-    private var movieDetailViewModel: MovieDetailViewModel? = null
+    private lateinit var movieDetailViewModel: MovieDetailViewModel
 
     private lateinit var movie: Movie
 
@@ -40,7 +40,7 @@ class MovieDetailActivity : AppCompatActivity() {
             .inject(this)
         super.onCreate(savedInstanceState)
 
-        movie = intent?.extras?.getParcelable<Movie>(KEY_MOVIE)!!
+        movie = intent?.extras?.getParcelable(KEY_MOVIE)!!
 
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         val view = binding.root
@@ -56,7 +56,7 @@ class MovieDetailActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        movieDetailViewModel?.getVideosFromMovie(movie.id)
+        movieDetailViewModel.getVideosFromMovie(movie.id)
         bindMovie(movie)
     }
 
@@ -65,7 +65,11 @@ class MovieDetailActivity : AppCompatActivity() {
             playYoutubeVideo(video.key)
         }
         with(binding.rvVideosFromMovie){
-            layoutManager = LinearLayoutManager(this@MovieDetailActivity, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(
+                this@MovieDetailActivity,
+                RecyclerView.HORIZONTAL,
+                false
+            )
             adapter = movieVideoAdapter
         }
     }
@@ -75,7 +79,7 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun setupObservers(){
-        movieDetailViewModel?.videosFromMovieLiveData?.observe(this){
+        movieDetailViewModel.videosFromMovieLiveData.observe(this){
             when(it.status){
                 Status.LOADING -> {
                     /* NO-OP*/
