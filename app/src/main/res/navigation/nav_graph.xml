@@ -25,7 +25,11 @@
             app:popExitAnim="@anim/exit_fade" />
         <action
             android:id="@+id/action_homeFragment_to_seriesListFragment"
-            app:destination="@id/seriesListFragment" />
+            app:destination="@id/seriesListFragment"
+            app:enterAnim="@anim/enter_fade"
+            app:exitAnim="@anim/exit_fade"
+            app:popEnterAnim="@anim/enter_fade"
+            app:popExitAnim="@anim/exit_fade" />
     </fragment>
     <fragment
         android:id="@+id/moviesListFragment"
@@ -54,7 +58,11 @@
         android:label="SeriesListFragment" >
         <action
             android:id="@+id/action_seriesListFragment_to_serieSearchFragment"
-            app:destination="@id/serieSearchFragment" />
+            app:destination="@id/serieSearchFragment"
+            app:enterAnim="@anim/enter_fade"
+            app:exitAnim="@anim/exit_fade"
+            app:popEnterAnim="@anim/enter_fade"
+            app:popExitAnim="@anim/exit_fade" />
     </fragment>
     <fragment
         android:id="@+id/serieSearchFragment"
