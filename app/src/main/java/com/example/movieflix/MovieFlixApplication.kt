@@ -8,13 +8,13 @@ import com.example.movieflix.presentation.di.home.HomeSubComponent
 import com.example.movieflix.presentation.di.movie.MovieSubcomponent
 import com.example.movieflix.presentation.di.serie.SerieSubcomponent
 
-class MovieFlixApplication : Application(), Injector {
+open class MovieFlixApplication : Application(), Injector {
     // Instance of the AppComponent that will be used by all the Activities in the project
     val appComponent: AppComponent by lazy {
         initializeComponent()
     }
 
-    private fun initializeComponent() : AppComponent {
+    open fun initializeComponent() : AppComponent {
         return DaggerAppComponent.factory().create(applicationContext)
     }
 
