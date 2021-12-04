@@ -21,7 +21,7 @@ android {
         buildConfigField("String","API_KEY",apikeyProperties['TMDB_APIKEY'])
         buildConfigField("String","BASE_URL",apikeyProperties['TMDB_BASE_URL'])
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.movieflix.presentation.MovieFlixTestRunner"
     }
 
     buildTypes {
