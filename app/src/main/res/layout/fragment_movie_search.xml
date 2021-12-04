@@ -79,10 +79,7 @@
 
     <TextView
         android:id="@+id/txt_no_data"
-        style="@style/TxtMovieDetail"
-        android:gravity="center"
-        android:visibility="gone"
-        android:textSize="@dimen/search_txt_no_data_textsize"
+        style="@style/TxtError"
         android:layout_marginTop="@dimen/search_txt_no_data_margin_t"
         android:text="@string/no_search_data"/>
 

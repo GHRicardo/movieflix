@@ -35,7 +35,7 @@
     <dimen name="search_et_padding">16dp</dimen>
     <dimen name="search_et_textsize">16sp</dimen>
     <dimen name="search_prg_margin_t">100sp</dimen>
-    <dimen name="search_txt_no_data_textsize">20sp</dimen>
+    <dimen name="search_txt_no_data_textsize">16sp</dimen>
     <dimen name="search_txt_no_data_margin_t">80dp</dimen>
 
     <dimen name="item_movie_search_height">150dp</dimen>

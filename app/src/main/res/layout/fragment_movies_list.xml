@@ -81,6 +81,11 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/txt_error"
+        style="@style/TxtError"
+        android:layout_centerInParent="true"/>
+
     <ProgressBar
         android:id="@+id/prg_movies"
         android:layout_width="wrap_content"

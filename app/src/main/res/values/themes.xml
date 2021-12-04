@@ -32,6 +32,12 @@
         <item name="android:layout_marginEnd">@dimen/app_margin_se</item>
     </style>
 
+    <style name="TxtError" parent="TxtMovieDetail">
+        <item name="android:gravity">center</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:textSize">@dimen/search_txt_no_data_textsize</item>
+    </style>
+
     <style name="ImgBack">
         <item name="android:layout_width">@dimen/back_size</item>
         <item name="android:layout_height">@dimen/back_size</item>

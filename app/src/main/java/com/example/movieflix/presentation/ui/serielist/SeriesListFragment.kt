@@ -165,6 +165,8 @@ class SeriesListFragment : Fragment() {
     private fun displaySeries(series:List<Serie>){
         mTotalScrolled = 0
         serieListAdapter.series = series
+        binding.txtError.hideView()
+        binding.rvMovies.showView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -178,7 +180,12 @@ class SeriesListFragment : Fragment() {
     }
 
     private fun showErrorMessage(message:String){
-        Log.e(TAG, "Error: $message")
+        mTotalScrolled = 0
+        with(binding){
+            txtError.text = message
+            txtError.showView()
+            rvMovies.hideView()
+        }
     }
 
     override fun onDestroyView() {

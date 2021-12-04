@@ -114,26 +114,37 @@ class SerieSearchFragment : Fragment(){
         serieSearchViewModel.searchedSeriesLiveData.observe(viewLifecycleOwner){
             when(it.status){
                 Status.LOADING -> {
-                    binding.prgSearchMovies.showView()
-                    binding.lytBtnClose.hideView()
-                    binding.etxtSearch.disabled()
+                    setupViewsLoading()
                 }
 
                 Status.SUCCESS -> {
-                    binding.prgSearchMovies.hideView()
-                    binding.lytBtnClose.showView()
-                    binding.etxtSearch.enabled()
+                    setupViewsNotLoading()
                     it.data?.let{ serieList ->
                         displaySeries(serieList)
                     }
                 }
 
                 Status.ERROR -> {
-                    binding.prgSearchMovies.hideView()
-                    binding.lytBtnClose.showView()
-                    binding.etxtSearch.enabled()
+                    setupViewsNotLoading()
+                    showErrorMessage(it.message?: "Unknown error")
                 }
             }
+        }
+    }
+
+    private fun setupViewsLoading(){
+        with(binding){
+            prgSearchMovies.showView()
+            lytBtnClose.hideView()
+            etxtSearch.disabled()
+        }
+    }
+
+    private fun setupViewsNotLoading(){
+        with(binding){
+            prgSearchMovies.hideView()
+            lytBtnClose.showView()
+            etxtSearch.enabled()
         }
     }
 
@@ -141,6 +152,18 @@ class SerieSearchFragment : Fragment(){
         serieSearchAdapter.series = series
         if(series.isEmpty()){
             binding.txtNoData.showView()
+            binding.txtNoData.text = getString(R.string.no_search_data)
+        }else{
+            binding.txtNoData.hideView()
+            binding.rvSearchMovies.showView()
+        }
+    }
+
+    private fun showErrorMessage(message:String){
+        with(binding){
+            txtNoData.showView()
+            txtNoData.text = message
+            rvSearchMovies.hideView()
         }
     }
 
