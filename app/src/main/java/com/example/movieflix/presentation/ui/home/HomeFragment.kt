@@ -15,7 +15,6 @@ import com.example.movieflix.R
 import com.example.movieflix.data.model.movie.Movie
 import com.example.movieflix.databinding.FragmentHomeBinding
 import com.example.movieflix.other.Constants
-import com.example.movieflix.other.Constants.OPTION_MOVIES
 import com.example.movieflix.other.Status
 import com.example.movieflix.other.hideView
 import com.example.movieflix.other.showView
@@ -66,15 +65,13 @@ class HomeFragment : Fragment() {
         homeViewModel.getSomeRandomMovie()
         binding.txtMovies.setOnClickListener {
             findNavController().navigate(
-                R.id.action_homeFragment_to_moviesListFragment,
-                bundleOf("type" to OPTION_MOVIES)
+                R.id.action_homeFragment_to_moviesListFragment
             )
         }
 
         binding.txtSeries.setOnClickListener {
             findNavController().navigate(
-                R.id.action_homeFragment_to_seriesListFragment,
-                bundleOf("type" to OPTION_MOVIES)
+                R.id.action_homeFragment_to_seriesListFragment
             )
         }
 

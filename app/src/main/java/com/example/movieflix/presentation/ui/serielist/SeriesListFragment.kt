@@ -17,7 +17,6 @@ import com.example.movieflix.R
 import com.example.movieflix.data.model.series.Serie
 import com.example.movieflix.databinding.FragmentMoviesListBinding
 import com.example.movieflix.other.Constants.KEY_SERIE
-import com.example.movieflix.other.Constants.OPTION_MOVIES
 import com.example.movieflix.other.Status
 import com.example.movieflix.other.animateViewHeaderFling
 import com.example.movieflix.other.hideView
@@ -37,7 +36,6 @@ class SeriesListFragment : Fragment() {
 
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
-    private var option = ""
 
     private var setPoint = 0F
     private var canOpenWithTouch = false
@@ -52,13 +50,6 @@ class SeriesListFragment : Fragment() {
         (requireActivity().application as MovieFlixApplication)
             .createSerieSubComponent()
             .inject(this)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            option = it.getString(OPTION_MOVIES, "")
-        }
     }
 
     override fun onCreateView(
