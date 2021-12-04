@@ -14,9 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieFlix">
         <activity
-            android:name=".presentation.ui.moviedetail.MovieDetailActivity"
+            android:name=".presentation.ui.seriedetail.SerieDetailActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.ui.moviedetail.MovieDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"

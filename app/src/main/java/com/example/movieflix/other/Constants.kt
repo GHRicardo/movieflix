@@ -11,4 +11,5 @@ object Constants {
 
     //KEY ARGUMENTS
     const val KEY_MOVIE = "keyMovie"
+    const val KEY_SERIE = "keySerie"
 }

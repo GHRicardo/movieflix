@@ -6,6 +6,7 @@ import com.example.movieflix.presentation.di.core.AppComponent
 import com.example.movieflix.presentation.di.core.DaggerAppComponent
 import com.example.movieflix.presentation.di.home.HomeSubComponent
 import com.example.movieflix.presentation.di.movie.MovieSubcomponent
+import com.example.movieflix.presentation.di.serie.SerieSubcomponent
 
 class MovieFlixApplication : Application(), Injector {
     // Instance of the AppComponent that will be used by all the Activities in the project
@@ -23,5 +24,9 @@ class MovieFlixApplication : Application(), Injector {
 
     override fun createHomeSubComponent(): HomeSubComponent {
         return appComponent.homeSubcomponent().create()
+    }
+
+    override fun createSerieSubComponent(): SerieSubcomponent {
+        return appComponent.serieSubcomponent().create()
     }
 }

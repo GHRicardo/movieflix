@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.movieflix.data.db.MovieDao
 import com.example.movieflix.data.db.MovieDatabase
+import com.example.movieflix.data.db.SerieDao
 import com.example.movieflix.other.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -24,5 +25,11 @@ class DatabaseModule {
     @Provides
     fun provideMovieDao(movieDatabase: MovieDatabase):MovieDao{
         return movieDatabase.movieDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideSerieDao(movieDatabase: MovieDatabase):SerieDao{
+        return movieDatabase.serieDao()
     }
 }
