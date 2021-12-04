@@ -75,11 +75,8 @@
             android:gravity="center_vertical|end">
 
             <ImageView
-                android:layout_width="@dimen/search_size"
-                android:layout_height="@dimen/search_size"
-                android:layout_marginStart="@dimen/search_margin_s"
-                android:layout_marginEnd="@dimen/search_margin_e"
-                android:src="@drawable/outline_search_white_24"/>
+                style="@style/ImgSearch"
+                android:contentDescription="@string/image_search"/>
 
         </LinearLayout>
     </LinearLayout>

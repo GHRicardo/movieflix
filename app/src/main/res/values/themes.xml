@@ -31,4 +31,20 @@
         <item name="android:layout_marginStart">@dimen/app_margin_se</item>
         <item name="android:layout_marginEnd">@dimen/app_margin_se</item>
     </style>
+
+    <style name="ImgBack">
+        <item name="android:layout_width">@dimen/back_size</item>
+        <item name="android:layout_height">@dimen/back_size</item>
+        <item name="android:layout_marginStart">@dimen/back_margin_s</item>
+        <item name="android:layout_marginEnd">@dimen/back_margin_e</item>
+        <item name="android:src">@drawable/outline_arrow_back_white_24</item>
+    </style>
+
+    <style name="ImgSearch">
+        <item name="android:layout_width">@dimen/search_size</item>
+        <item name="android:layout_height">@dimen/search_size</item>
+        <item name="android:layout_marginStart">@dimen/search_margin_s</item>
+        <item name="android:layout_marginEnd">@dimen/search_margin_e</item>
+        <item name="android:src">@drawable/outline_search_white_24</item>
+    </style>
 </resources>

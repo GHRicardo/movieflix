@@ -20,11 +20,8 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="@dimen/back_size"
-                android:layout_height="@dimen/back_size"
-                android:layout_marginStart="@dimen/back_margin_s"
-                android:layout_marginEnd="@dimen/back_margin_e"
-                android:src="@drawable/outline_arrow_back_white_24"/>
+                style="@style/ImgBack"
+                android:contentDescription="@string/image_back"/>
         </LinearLayout>
 
         <TextView
@@ -79,6 +76,15 @@
                 android:contentDescription="@string/search_close_button_image"/>
         </LinearLayout>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_no_data"
+        style="@style/TxtMovieDetail"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="@dimen/search_txt_no_data_textsize"
+        android:layout_marginTop="@dimen/search_txt_no_data_margin_t"
+        android:text="@string/no_search_data"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_movies"

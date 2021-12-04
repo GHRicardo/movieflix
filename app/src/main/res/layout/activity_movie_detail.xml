@@ -46,38 +46,44 @@
             android:layout_marginBottom="@dimen/detail_txt_votes_margin_b"
             android:textSize="@dimen/detail_txt_votes_textsize" />
 
-        <LinearLayout
-            android:id="@+id/lyt_rv_videos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt_related_videos"
-                style="@style/TxtMovieDetail"
-                android:layout_marginBottom="@dimen/detail_txt_related_margin_b"
-                android:textSize="@dimen/detail_txt_related_textsize"
-                android:textStyle="bold"
-                android:text="@string/related_videos"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_videos_from_movie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/detail_txt_overview_margin_t">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/txt_overview"
-                style="@style/TxtMovieDetail"
-                android:textSize="@dimen/detail_txt_overview_textsize" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/lyt_rv_videos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_related_videos"
+                        style="@style/TxtMovieDetail"
+                        android:layout_marginBottom="@dimen/detail_txt_related_margin_b"
+                        android:textSize="@dimen/detail_txt_related_textsize"
+                        android:textStyle="bold"
+                        android:text="@string/related_videos"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_videos_from_movie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_overview"
+                    style="@style/TxtMovieDetail"
+                    android:layout_marginTop="@dimen/detail_txt_overview_margin_t"
+                    android:textSize="@dimen/detail_txt_overview_textsize" />
+
+            </LinearLayout>
         </ScrollView>
-
     </LinearLayout>
 
     <LinearLayout
@@ -87,11 +93,8 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="@dimen/back_size"
-            android:layout_height="@dimen/back_size"
-            android:layout_marginStart="@dimen/back_margin_s"
-            android:layout_marginEnd="@dimen/back_margin_e"
-            android:src="@drawable/outline_arrow_back_white_24"/>
+            style="@style/ImgBack"
+            android:contentDescription="@string/image_back"/>
     </LinearLayout>
 
 </RelativeLayout>

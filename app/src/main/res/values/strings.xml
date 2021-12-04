@@ -9,6 +9,7 @@
     <string name="list_movie_label">Películas</string>
     <string name="search_movie_label">Buscar</string>
     <string name="next">Ver</string>
+    <string name="no_search_data">La búsqueda no produjo resultados</string>
 
     <!--Content Descriptions-->
     <string name="home_img_content_description">Random image for background</string>
@@ -16,4 +17,6 @@
     <string name="item_movie_content_description">Movie image</string>
     <string name="search_close_button_image">Search close button image</string>
     <string name="video_placeholder_image">Video placeholder image</string>
+    <string name="image_back">Image for back button</string>
+    <string name="image_search">Image for search button</string>
 </resources>

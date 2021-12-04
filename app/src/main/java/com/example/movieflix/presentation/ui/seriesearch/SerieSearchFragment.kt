@@ -139,6 +139,9 @@ class SerieSearchFragment : Fragment(){
 
     private fun displaySeries(series:List<Serie>){
         serieSearchAdapter.series = series
+        if(series.isEmpty()){
+            binding.txtNoData.showView()
+        }
     }
 
     override fun onDestroyView() {

@@ -132,6 +132,9 @@ class MovieSearchFragment : Fragment(){
 
     private fun displayMovies(movies:List<Movie>){
         movieSearchAdapter.movies = movies
+        if(movies.isEmpty()){
+            binding.txtNoData.showView()
+        }
     }
 
     override fun onDestroyView() {
