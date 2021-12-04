@@ -45,7 +45,7 @@ class MovieAdapter @Inject constructor():
 
     private val diffCallBack = object : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.id == newItem.id && oldItem.type == newItem.type
         }
 
         override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
