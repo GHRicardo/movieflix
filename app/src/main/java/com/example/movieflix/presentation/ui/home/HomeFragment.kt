@@ -71,6 +71,13 @@ class HomeFragment : Fragment() {
             )
         }
 
+        binding.txtSeries.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_homeFragment_to_seriesListFragment,
+                bundleOf("type" to OPTION_MOVIES)
+            )
+        }
+
         binding.imgSearch.setOnClickListener {
             findNavController().navigate(
                 R.id.action_homeFragment_to_movieSearchFragment
