@@ -20,12 +20,12 @@ import com.example.movieflix.other.hideView
 import com.example.movieflix.other.showView
 import javax.inject.Inject
 
-class HomeFragment : Fragment() {
+class HomeFragment(var homeViewModel: HomeViewModel? = null) : Fragment() {
 
     @Inject
     lateinit var homeViewModelFactory: HomeViewModelFactory
 
-    private lateinit var homeViewModel: HomeViewModel
+    //private lateinit var homeViewModel: HomeViewModel
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -59,10 +59,10 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        homeViewModel =
+        homeViewModel = homeViewModel?:
             ViewModelProvider(this, homeViewModelFactory)[HomeViewModel::class.java]
         setupObservers()
-        homeViewModel.getSomeRandomMovie()
+        homeViewModel?.getSomeRandomMovie()
         binding.txtMovies.setOnClickListener {
             findNavController().navigate(
                 R.id.action_homeFragment_to_moviesListFragment
@@ -90,10 +90,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupObservers(){
-        homeViewModel.randomMovieLiveData.observe(viewLifecycleOwner){
+        homeViewModel?.randomMovieLiveData?.observe(viewLifecycleOwner){
             when(it.status){
                 Status.LOADING -> {
-
+                    /* NO-OP */
                 }
 
                 Status.SUCCESS -> {
