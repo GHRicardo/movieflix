@@ -16,10 +16,10 @@ class SerieListAdapter @Inject constructor():
 
     companion object{
         const val ITEM_HEADER = 0
-        const val ITEM_MOVIE = 1
+        const val ITEM_SERIE = 1
     }
 
-    class MovieViewHolder(private val binding: ItemMovieListBinding) :
+    class SerieViewHolder(private val binding: ItemMovieListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(serie: Serie) {
@@ -31,7 +31,7 @@ class SerieListAdapter @Inject constructor():
         }
     }
 
-    class MovieHeaderViewHolder(private val binding: ItemHeaderMovieListBinding) :
+    class SerieHeaderViewHolder(private val binding: ItemHeaderMovieListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(serie: Serie) {
@@ -61,8 +61,8 @@ class SerieListAdapter @Inject constructor():
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if(viewType == ITEM_MOVIE) {
-            return MovieViewHolder(
+        if(viewType == ITEM_SERIE) {
+            return SerieViewHolder(
                 ItemMovieListBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -70,7 +70,7 @@ class SerieListAdapter @Inject constructor():
                 )
             )
         }else{
-            return MovieHeaderViewHolder(
+            return SerieHeaderViewHolder(
                 ItemHeaderMovieListBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -81,15 +81,15 @@ class SerieListAdapter @Inject constructor():
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val movie = series[position]
-        if(holder.itemViewType == ITEM_MOVIE){
-            (holder as MovieViewHolder).bind(movie)
+        val serie = series[position]
+        if(holder.itemViewType == ITEM_SERIE){
+            (holder as SerieViewHolder).bind(serie)
         }else{
-            (holder as MovieHeaderViewHolder).bind(movie)
+            (holder as SerieHeaderViewHolder).bind(serie)
         }
         holder.itemView.setOnClickListener {
             onItemClickListener?.let { click->
-                click(movie)
+                click(serie)
             }
         }
     }
@@ -102,7 +102,7 @@ class SerieListAdapter @Inject constructor():
         return if(position == 0){
             ITEM_HEADER
         }else{
-            ITEM_MOVIE
+            ITEM_SERIE
         }
     }
 

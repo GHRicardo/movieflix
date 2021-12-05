@@ -11,8 +11,8 @@ import com.example.movieflix.databinding.ItemMovieSearchBinding
 import javax.inject.Inject
 
 class SerieSearchAdapter @Inject constructor() :
-    RecyclerView.Adapter<SerieSearchAdapter.MovieViewHolder>(){
-    class MovieViewHolder(private val binding: ItemMovieSearchBinding):
+    RecyclerView.Adapter<SerieSearchAdapter.SerieViewHolder>(){
+    class SerieViewHolder(private val binding: ItemMovieSearchBinding):
         RecyclerView.ViewHolder(binding.root){
 
         fun bind(serie: Serie){
@@ -40,8 +40,8 @@ class SerieSearchAdapter @Inject constructor() :
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SerieViewHolder {
+        return SerieViewHolder(
             ItemMovieSearchBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -50,12 +50,12 @@ class SerieSearchAdapter @Inject constructor() :
         )
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movie = series[position]
-        holder.bind(movie)
+    override fun onBindViewHolder(holder: SerieViewHolder, position: Int) {
+        val serie = series[position]
+        holder.bind(serie)
         holder.itemView.setOnClickListener {
             onItemClickListener?.let { click->
-                click(movie)
+                click(serie)
             }
         }
     }
