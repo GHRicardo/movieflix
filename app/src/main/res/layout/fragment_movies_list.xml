@@ -65,6 +65,7 @@
             android:layout_height="wrap_content"
             android:background="@color/toolbar_color"
             app:tabIndicatorColor="@color/white"
+            android:theme="@style/Theme.MaterialComponents.Light.Dialog"
             app:tabTextColor="@color/white">
 
             <com.google.android.material.tabs.TabItem
