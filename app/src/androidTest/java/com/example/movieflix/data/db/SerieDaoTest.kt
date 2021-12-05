@@ -5,8 +5,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.filters.SmallTest
 import com.example.movieflix.TestMovieFlixApplication
 import com.example.movieflix.data.model.series.Serie
-import com.example.movieflix.presentation.di.core.DaggerTestAppComponent
-import com.example.movieflix.presentation.di.core.TestAppComponent
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
