@@ -2,7 +2,6 @@ package com.example.movieflix.presentation.ui.movielist
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -23,7 +22,7 @@ import com.example.movieflix.other.showView
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
 
-class MoviesListFragment : Fragment() {
+class MoviesListFragment(var movieListViewModel: MovieListViewModel? = null) : Fragment() {
 
     @Inject
     lateinit var movieListViewModelFactory: MovieListViewModelFactory
@@ -31,7 +30,7 @@ class MoviesListFragment : Fragment() {
     @Inject
     lateinit var movieAdapter: MovieAdapter
 
-    private lateinit var movieListViewModel: MovieListViewModel
+    //lateinit var movieListViewModel: MovieListViewModel
 
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
@@ -64,11 +63,11 @@ class MoviesListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setPoint = resources.getDimension(R.dimen.toolbar_height)
-        movieListViewModel =
+        movieListViewModel = movieListViewModel ?:
             ViewModelProvider(this, movieListViewModelFactory)[MovieListViewModel::class.java]
         setupRecyclerView()
         setupObservers()
-        movieListViewModel.getPopularMovies()
+        movieListViewModel?.getPopularMovies()
 
         binding.imgBack.setOnClickListener {
             findNavController().popBackStack()
@@ -83,9 +82,9 @@ class MoviesListFragment : Fragment() {
         binding.tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if(tab?.position == 0){
-                    movieListViewModel.getPopularMovies()
+                    movieListViewModel?.getPopularMovies()
                 }else{
-                    movieListViewModel.getTopRatedMovies()
+                    movieListViewModel?.getTopRatedMovies()
                 }
             }
 
@@ -134,7 +133,7 @@ class MoviesListFragment : Fragment() {
     }
 
     private fun setupObservers(){
-        movieListViewModel.moviesLiveData.observe(viewLifecycleOwner){
+        movieListViewModel?.moviesLiveData?.observe(viewLifecycleOwner){
             when(it.status){
                 Status.LOADING -> {
                     binding.prgMovies.showView()

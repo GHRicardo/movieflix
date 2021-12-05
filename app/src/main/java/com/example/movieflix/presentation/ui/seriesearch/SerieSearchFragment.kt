@@ -25,7 +25,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SerieSearchFragment : Fragment(){
+class SerieSearchFragment(var serieSearchViewModel: SerieSearchViewModel? = null) : Fragment(){
 
     @Inject
     lateinit var serieSearchViewModelFactory: SerieSearchViewModelFactory
@@ -33,7 +33,7 @@ class SerieSearchFragment : Fragment(){
     @Inject
     lateinit var serieSearchAdapter: SerieSearchAdapter
 
-    private lateinit var serieSearchViewModel: SerieSearchViewModel
+    //private lateinit var serieSearchViewModel: SerieSearchViewModel
 
     private var _binding: FragmentMovieSearchBinding? = null
     private val binding get() = _binding!!
@@ -67,7 +67,7 @@ class SerieSearchFragment : Fragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        serieSearchViewModel =
+        serieSearchViewModel = serieSearchViewModel ?:
             ViewModelProvider(this, serieSearchViewModelFactory)[SerieSearchViewModel::class.java]
 
         binding.imgBack.setOnClickListener {
@@ -90,7 +90,7 @@ class SerieSearchFragment : Fragment(){
                 delay(SEARCH_EDIT_TIME_DELAY)
                 editable?.let{
                     if(editable.toString().isNotEmpty()){
-                        serieSearchViewModel.searchSeriesByName(editable.toString())
+                        serieSearchViewModel?.searchSeriesByName(editable.toString())
                     }
                 }
             }
@@ -111,7 +111,7 @@ class SerieSearchFragment : Fragment(){
     }
 
     private fun setupObservers(){
-        serieSearchViewModel.searchedSeriesLiveData.observe(viewLifecycleOwner){
+        serieSearchViewModel?.searchedSeriesLiveData?.observe(viewLifecycleOwner){
             when(it.status){
                 Status.LOADING -> {
                     setupViewsLoading()

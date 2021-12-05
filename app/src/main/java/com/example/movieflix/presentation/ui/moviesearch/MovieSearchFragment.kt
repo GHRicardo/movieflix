@@ -24,7 +24,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MovieSearchFragment : Fragment(){
+class MovieSearchFragment(var movieSearchViewModel: MovieSearchViewModel? = null) : Fragment(){
 
     @Inject
     lateinit var movieSearchViewModelFactory: MovieSearchViewModelFactory
@@ -32,7 +32,7 @@ class MovieSearchFragment : Fragment(){
     @Inject
     lateinit var movieSearchAdapter: MovieSearchAdapter
 
-    private lateinit var movieSearchViewModel: MovieSearchViewModel
+    //private lateinit var movieSearchViewModel: MovieSearchViewModel
 
     private var _binding: FragmentMovieSearchBinding? = null
     private val binding get() = _binding!!
@@ -60,7 +60,7 @@ class MovieSearchFragment : Fragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        movieSearchViewModel =
+        movieSearchViewModel = movieSearchViewModel ?:
             ViewModelProvider(this, movieSearchViewModelFactory)[MovieSearchViewModel::class.java]
 
         binding.imgBack.setOnClickListener {
@@ -83,7 +83,7 @@ class MovieSearchFragment : Fragment(){
                 delay(SEARCH_EDIT_TIME_DELAY)
                 editable?.let{
                     if(editable.toString().isNotEmpty()){
-                        movieSearchViewModel.searchMoviesByName(editable.toString())
+                        movieSearchViewModel?.searchMoviesByName(editable.toString())
                     }
                 }
             }
@@ -104,7 +104,7 @@ class MovieSearchFragment : Fragment(){
     }
 
     private fun setupObservers(){
-        movieSearchViewModel.searchedMoviesLiveData.observe(viewLifecycleOwner){
+        movieSearchViewModel?.searchedMoviesLiveData?.observe(viewLifecycleOwner){
             when(it.status){
                 Status.LOADING -> {
                     setupViewsLoading()

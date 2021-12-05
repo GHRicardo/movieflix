@@ -3,7 +3,6 @@ package com.example.movieflix.presentation.ui.serielist
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -24,7 +23,7 @@ import com.example.movieflix.other.showView
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
 
-class SeriesListFragment : Fragment() {
+class SeriesListFragment(var serieListViewModel: SerieListViewModel? = null) : Fragment() {
 
     @Inject
     lateinit var serieListViewModelFactory: SerieListViewModelFactory
@@ -32,7 +31,7 @@ class SeriesListFragment : Fragment() {
     @Inject
     lateinit var serieListAdapter: SerieListAdapter
 
-    private lateinit var serieListViewModel: SerieListViewModel
+    //private lateinit var serieListViewModel: SerieListViewModel
 
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
@@ -71,11 +70,11 @@ class SeriesListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setPoint = resources.getDimension(R.dimen.toolbar_height)
-        serieListViewModel =
+        serieListViewModel = serieListViewModel ?:
             ViewModelProvider(this, serieListViewModelFactory)[SerieListViewModel::class.java]
         setupRecyclerView()
         setupObservers()
-        serieListViewModel.getPopularSeries()
+        serieListViewModel?.getPopularSeries()
 
         binding.imgBack.setOnClickListener {
             findNavController().popBackStack()
@@ -90,9 +89,9 @@ class SeriesListFragment : Fragment() {
         binding.tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if(tab?.position == 0){
-                    serieListViewModel.getPopularSeries()
+                    serieListViewModel?.getPopularSeries()
                 }else{
-                    serieListViewModel.getTopRatedSeries()
+                    serieListViewModel?.getTopRatedSeries()
                 }
             }
 
@@ -141,7 +140,7 @@ class SeriesListFragment : Fragment() {
     }
 
     private fun setupObservers(){
-        serieListViewModel.seriesLiveData.observe(viewLifecycleOwner){
+        serieListViewModel?.seriesLiveData?.observe(viewLifecycleOwner){
             when(it.status){
                 Status.LOADING -> {
                     binding.prgMovies.showView()
